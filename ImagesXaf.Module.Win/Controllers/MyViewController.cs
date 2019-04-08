@@ -15,48 +15,7 @@ namespace ImagesXaf.Module.Win.Controllers
 {
     public class MyViewController : ViewController<DetailView>
     {
-        //protected override void OnActivated()
-        //{
-        //    base.OnActivated();
-
-        //    foreach (ViewItem item in ((DetailView)View).Items)
-        //    {
-        //        if ((item is ControlViewItem) & item.Id == "Item1") { /*...*/ }
-        //    }
-
-
-        //    ImagePropertyEditor imageEditor = View.FindItem("Photo") as ImagePropertyEditor;
-
-
-        //    if (imageEditor != null)
-        //    {
-        //        imageEditor.ControlCreated += (s, e) =>
-        //            {
-
-        //                ImagePropertyEditor cos = (ImagePropertyEditor)s;
-        //                var cos2 = e;
-        //                var ctrl = ((ImagePropertyEditor)s).Control;
-        //                XafPictureEdit pEdit = (XafPictureEdit)ctrl;
-        //                //     XafImageEdit iEdit = (XafImageEdit)ctrl;
-
-        //                pEdit.MouseDown += MouseDown;
-        //                pEdit.MouseUp += MouseUp;
-        //                pEdit.MouseMove += MouseMove;
-        //                pEdit.Invalidated += Invalidated;
-        //            //    pEdit.ControlsCreated += (s1, e1) => { }
-        //                //{
-        //                //    GridListEditor gridListEditor = ((ListView)s1).Editor as GridListEditor;
-        //                //    if (gridListEditor != null)
-        //                //    {
-        //                //        GridControl grid = gridListEditor.Grid;
-        //                //    }
-        //                //};
-        //            };
-
-
-        //    }
-
-        //}
+      
 
 
         Image mainImage = null;
@@ -72,7 +31,7 @@ namespace ImagesXaf.Module.Win.Controllers
         {
             base.OnActivated();
             ((CompositeView)View).ItemsChanged += PictureditorController_ItemsChanged;
-            TryInitializeAnniversaryItem();
+            TryInitializePictureItem();
         }
         protected override void OnDeactivated()
         {
@@ -83,13 +42,13 @@ namespace ImagesXaf.Module.Win.Controllers
 
         private void PictureditorController_ItemsChanged(Object sender, ViewItemsChangedEventArgs e)
         {
-            if (e.ChangedType == ViewItemsChangedType.Added && e.Item.Id == "Anniversary")
+            if (e.ChangedType == ViewItemsChangedType.Added && e.Item.Id == "Photo")
             {
-                TryInitializeAnniversaryItem();
+                TryInitializePictureItem();
             }
         }
 
-        public void TryInitializeAnniversaryItem()
+        public void TryInitializePictureItem()
         {
 
             ImagePropertyEditor imageEditor = View.FindItem("Photo") as ImagePropertyEditor;
@@ -132,15 +91,7 @@ namespace ImagesXaf.Module.Win.Controllers
         private void Resize(object sender, EventArgs e)
         {
 
-            graphics = pEdit.CreateGraphics();
-            if (graphics != null )
-            {
-                mainImage = pEdit.Image;
-                if (mainImage != null)
-                {
-                    graphics.DrawImage(mainImage, 0, 0, pEdit.Width, pEdit.Height); 
-                }
-            }
+            UpdateGraphics();
 
         }
 
@@ -149,27 +100,25 @@ namespace ImagesXaf.Module.Win.Controllers
 
             if (graphics == null)
             {
-                graphics = pEdit.CreateGraphics();
-                mainImage = pEdit.Image;
+                UpdateGraphics();
+            }
+        }
 
+        private void UpdateGraphics()
+        {
+            graphics = pEdit.CreateGraphics();
+            mainImage = pEdit.Image;
 
-                ulCorner = new PointF(0, 0);
-                if (mainImage != null)
-                {
-                    //  graphics.DrawImage(mainImage, ulCorner);
-                    graphics.DrawImage(mainImage, 0, 0, pEdit.Width, pEdit.Height);
-                }
+            ulCorner = new PointF(0, 0);
+            if (mainImage != null && graphics != null)
+            {
+                graphics.DrawImage(mainImage, 0, 0, pEdit.Width, pEdit.Height);
             }
         }
 
         private void LoadCompleted(object sender, EventArgs e)
         {
-            //    graphics = pEdit.CreateGraphics();
-            //    mainImage = pEdit.Image;
-
-
-            //    ulCorner = new PointF(0, 0);
-            //    graphics.DrawImage(mainImage, ulCorner);
+            UpdateGraphics();
         }
 
         private void Invalidated(object sender, InvalidateEventArgs e)
