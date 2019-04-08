@@ -1,4 +1,5 @@
-﻿using DevExpress.Persistent.BaseImpl;
+﻿using DevExpress.Persistent.Base;
+using DevExpress.Persistent.BaseImpl;
 using DevExpress.Xpo;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ImagesXaf.Module.BusinessObjects
 {
+    [DefaultClassOptions]
     public class Osoba : Person
     {
         public Osoba(Session session) : base(session)

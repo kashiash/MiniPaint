@@ -3,6 +3,7 @@ using DevExpress.ExpressApp.Editors;
 using DevExpress.ExpressApp.Layout;
 using DevExpress.ExpressApp.Win.Editors;
 using DevExpress.XtraGrid;
+using ImagesXaf.Module.BusinessObjects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -26,12 +27,17 @@ namespace ImagesXaf.Module.Win.Controllers
         int? initY = null;
         PointF ulCorner;
         XafPictureEdit pEdit;
+        Osoba currentRec;
 
         protected override void OnActivated()
         {
             base.OnActivated();
             ((CompositeView)View).ItemsChanged += PictureditorController_ItemsChanged;
             TryInitializePictureItem();
+
+
+
+             currentRec = (Osoba)View.CurrentObject;
         }
         protected override void OnDeactivated()
         {
@@ -123,7 +129,14 @@ namespace ImagesXaf.Module.Win.Controllers
 
         private void Invalidated(object sender, InvalidateEventArgs e)
         {
-            //  throw new NotImplementedException();
+            if (mainImage != null && graphics != null)
+            {
+                foreach (var opis in currentRec.OpisZdjeciaCollection)
+                {
+                    Pen pen = new Pen(Color.Red, 3);
+                    graphics.DrawEllipse(pen, opis.XPos - 50, opis.YPos - 50, 100, 100);
+                }
+            }
         }
 
         private void MouseMove(object sender, MouseEventArgs e)
@@ -151,6 +164,16 @@ namespace ImagesXaf.Module.Win.Controllers
             //  SolidBrush sb = new SolidBrush(Color.Red);
             Pen pen = new Pen(Color.Red, 3);
             graphics.DrawEllipse(pen, e.X - 50, e.Y - 50, 100, 100);
+
+            IObjectSpace objectSpace = View.ObjectSpace;
+            var opis = objectSpace.CreateObject<OpisZdjecia>();
+            opis.Opis = $"Opis {DateTime.Now}";
+            opis.XPos = e.X;
+            opis.YPos = e.Y;
+            opis.Osoba = objectSpace.GetObject(currentRec);
+          //  currentRec.OpisZdjeciaCollection.Add(opis);
+            objectSpace.CommitChanges();
+            objectSpace.Refresh();
         }
     }
 }
