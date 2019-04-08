@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="ImagesXaf">
+  <NavigationItems>
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="@e7ee4889-49bb-4e54-a6d6-dc31b0a53196" ViewId="Person_ListView" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="18.2.7.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="Person_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100" Direction="Vertical">
+          <LayoutGroup Id="Person" ShowCaption="False" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True" Removed="True">
+            <LayoutGroup Id="Person_col1" ShowCaption="False" Index="0" RelativeSize="45.426594926979249" IsNewNode="True">
+              <LayoutItem Id="FullName" ViewItem="FullName" Index="0" RelativeSize="2.7522935779816513" IsNewNode="True" />
+              <LayoutItem Id="FirstName" ViewItem="FirstName" Index="1" RelativeSize="1.9877675840978593" IsNewNode="True" />
+              <LayoutItem Id="MiddleName" ViewItem="MiddleName" Index="2" RelativeSize="1.9877675840978593" IsNewNode="True" />
+              <LayoutItem Id="LastName" ViewItem="LastName" Index="3" RelativeSize="1.9877675840978593" IsNewNode="True" />
+              <LayoutItem Id="DisplayName" ViewItem="DisplayName" Index="4" RelativeSize="1.9877675840978593" IsNewNode="True" />
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="5" RelativeSize="11.697247706422019" IsNewNode="True">
+                <LayoutItem Id="Email" ViewItem="Email" Index="0" RelativeSize="29.032258064516128" IsNewNode="True" />
+                <LayoutItem Id="Birthday" ViewItem="Birthday" Index="1" RelativeSize="20.967741935483872" IsNewNode="True" />
+                <LayoutItem Id="Address1" ViewItem="Address1" Index="2" RelativeSize="20.967741935483872" IsNewNode="True" />
+                <LayoutItem Id="Address2" ViewItem="Address2" Index="3" RelativeSize="29.032258064516128" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="PhoneNumbers" ViewItem="PhoneNumbers" Index="6" RelativeSize="77.5993883792049" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="Photo" ShowCaption="False" ViewItem="Photo" Index="1" RelativeSize="54.573405073020751" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="PhoneNumbers_Group" Caption="Phone Numbers" RelativeSize="81.345565749235476" Removed="True">
+            <LayoutItem Id="PhoneNumbers" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

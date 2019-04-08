@@ -58,6 +58,7 @@
             this.aboutMiniPaintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_Draw = new System.Windows.Forms.Panel();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btt_Arrow = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -87,6 +88,7 @@
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.txt_ShapeSize);
             this.panel7.Controls.Add(this.label4);
+            this.panel7.Controls.Add(this.btt_Arrow);
             this.panel7.Controls.Add(this.btn_Circle);
             this.panel7.Controls.Add(this.btn_Rectangle);
             this.panel7.Controls.Add(this.btn_Square);
@@ -94,12 +96,12 @@
             this.panel7.Location = new System.Drawing.Point(7, 231);
             this.panel7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(173, 226);
+            this.panel7.Size = new System.Drawing.Size(173, 285);
             this.panel7.TabIndex = 3;
             // 
             // txt_ShapeSize
             // 
-            this.txt_ShapeSize.Location = new System.Drawing.Point(4, 188);
+            this.txt_ShapeSize.Location = new System.Drawing.Point(4, 257);
             this.txt_ShapeSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_ShapeSize.Name = "txt_ShapeSize";
             this.txt_ShapeSize.Size = new System.Drawing.Size(161, 22);
@@ -110,7 +112,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 169);
+            this.label4.Location = new System.Drawing.Point(2, 236);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 17);
@@ -406,6 +408,19 @@
             this.toolStripMenuItem1.Text = "Load picture";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
+            // btt_Arrow
+            // 
+            this.btt_Arrow.BackColor = System.Drawing.SystemColors.Control;
+            this.btt_Arrow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btt_Arrow.Location = new System.Drawing.Point(5, 174);
+            this.btt_Arrow.Margin = new System.Windows.Forms.Padding(4);
+            this.btt_Arrow.Name = "btt_Arrow";
+            this.btt_Arrow.Size = new System.Drawing.Size(163, 34);
+            this.btt_Arrow.TabIndex = 7;
+            this.btt_Arrow.Text = "Arrow";
+            this.btt_Arrow.UseVisualStyleBackColor = false;
+            this.btt_Arrow.Click += new System.EventHandler(this.btt_Arrow_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -470,6 +485,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutMiniPaintToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.Button btt_Arrow;
     }
 }
 

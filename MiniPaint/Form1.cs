@@ -28,9 +28,12 @@ namespace MiniPaint
         bool drawSquare = false;
         bool drawRectangle = false;
         bool drawCircle = false;
+        bool drawArrow = false;
+        bool mouseDown = false;
 
         Image mainImage = null;
         PointF ulCorner;
+        
 
         //Event fired when the mouse pointer is moved over the Panel(pnl_Draw).
         private void pnl_Draw_MouseMove(object sender, MouseEventArgs e)
@@ -45,7 +48,7 @@ namespace MiniPaint
                 initY = e.Y;
             }
 
-            if (drawSquare)
+            if (drawSquare && mouseDown)
             {
                 if (initX == null)
                 initX = e.X;
@@ -65,10 +68,26 @@ namespace MiniPaint
                 startPaint = false;
           
             }
+
+            if (drawArrow && mouseDown)
+            {
+                if (initX == null)
+                    initX = e.X;
+                if (initY == null)
+                    initY = e.Y;
+                //Setting the Pen BackColor and line Width
+                Pen p = new Pen(Color.Red, 3);
+                //Drawing the line.
+                g.DrawImage(mainImage, ulCorner);
+                g.DrawLine(p, new Point(initX ?? e.X, initY ?? e.Y), new Point(e.X, e.Y));
+                startPaint = false;
+
+            }
         }
         //Event Fired when the mouse pointer is over Panel and a mouse button is pressed
         private void pnl_Draw_MouseDown(object sender, MouseEventArgs e)
         {
+            mouseDown = true;
             startPaint = true;
             if (drawSquare)
             {
@@ -79,13 +98,19 @@ namespace MiniPaint
             }
             if(drawRectangle)
             {
-                SolidBrush sb = new SolidBrush(btn_PenColor.BackColor);
-                //setting the width twice of the height
-                g.FillRectangle(sb, e.X, e.Y, 2*int.Parse(txt_ShapeSize.Text), int.Parse(txt_ShapeSize.Text));
+                initX = e.X;
+                initY = e.Y;
                 startPaint = false;
                 drawRectangle = false;
             }
             if (drawCircle)
+            {
+                initX = e.X;
+                initY = e.Y;
+                startPaint = false;
+            }
+
+            if (drawArrow)
             {
                 initX = e.X;
                 initY = e.Y;
@@ -125,6 +150,40 @@ namespace MiniPaint
                 drawSquare = false;
             }
 
+            if (drawArrow)
+            {
+
+                //Setting the Pen BackColor and line Width
+                Pen p = new Pen(Color.Red, 3);
+                SolidBrush sb = new SolidBrush(Color.Blue);
+                //Drawing the line.
+                Point endPoint = new Point(e.X, e.Y);
+                g.DrawLine(p, new Point(initX ?? e.X, initY ?? e.Y), endPoint);
+               
+                Point rightArrowPoint = new Point(e.X - 15, e.Y -5);
+                Point leftArrowPoint = new Point(e.X + 15, e.Y +5 );
+                Point[] curvePoints = { rightArrowPoint, endPoint, leftArrowPoint};
+
+
+                // Create points that define polygon.
+                Point point1 = new Point(50, 50);
+                Point point2 = new Point(100, 25);
+                Point point3 = new Point(200, 5);
+                Point point4 = new Point(250, 50);
+                Point point5 = new Point(300, 100);
+                Point point6 = new Point(350, 200);
+                Point point7 = new Point(250, 250);
+                Point[] curvePoints2 = { point1, point2, point3, point4, point5, point6, point7 };
+
+                // Draw polygon to screen.
+                g.FillPolygon(sb, curvePoints);
+
+                g.FillPolygon(sb, curvePoints);
+
+                startPaint = false;
+                drawArrow = false;
+            }
+            mouseDown = false;
             startPaint = false;
             initX = null;
             initY = null;
@@ -230,6 +289,11 @@ namespace MiniPaint
 
             // Draw image to screen.
             g.DrawImage(mainImage, ulCorner);
+        }
+
+        private void btt_Arrow_Click(object sender, EventArgs e)
+        {
+            drawArrow = true;
         }
     }
 }
